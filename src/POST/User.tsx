@@ -14,6 +14,7 @@ interface CreateUserProps {
   const [email, setEmail] = React.useState('');
   const [phone_number, setPhoneNumber] = React.useState('');
   const [gender, setGender] = React.useState('');
+  const [observations, setObservations] = React.useState('');
   const [error, setError] = React.useState('');
 
   const validateForm = () => {
@@ -36,7 +37,8 @@ interface CreateUserProps {
       },
       email: email,
       phone_number: phone_number,
-      gender: gender
+      gender: gender,
+      observations: observations
     };
 
     axios.post("http://localhost:3000/user", user)//para web
@@ -50,6 +52,7 @@ interface CreateUserProps {
         setEmail('');
         setPhoneNumber('');
         setGender('');
+        setObservations('');
       })
       .catch(error => {
         console.error("Failed to add user", error);
@@ -93,6 +96,12 @@ interface CreateUserProps {
         placeholder="Gender"
         value={gender} 
         onChangeText={setGender} 
+        style={styles.input} 
+      />
+      <TextInput 
+        placeholder="Observations"
+        value={observations} 
+        onChangeText={setObservations} 
         style={styles.input} 
       />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
